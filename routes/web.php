@@ -15,6 +15,7 @@ Route::group([
 	'prefix' => 'webhooks'
 ], function () {
 	Route::post('users/follows', 'WebhooksController@userFollows');
+	Route::get('users/follows', 'WebhooksController@userFollows');
 });
 
 Route::group([

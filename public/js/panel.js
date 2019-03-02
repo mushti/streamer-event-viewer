@@ -53680,13 +53680,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+window.routePrefix = '';
+
+if (window.location.pathname.startsWith('/streamereventviewer')) {
+  window.routePrefix = '/streamereventviewer/public';
+}
+
 var routes = [{
   name: 'login',
-  path: '/login',
+  path: routePrefix + '/login',
   component: _components_TwitchLogin__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   name: 'stream',
-  path: '/',
+  path: routePrefix + '/',
   component: _components_StreamViewer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({

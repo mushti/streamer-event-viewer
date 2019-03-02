@@ -2,15 +2,20 @@ import VueRouter from 'vue-router';
 import TwitchLogin from './components/TwitchLogin';
 import StreamViewer from './components/StreamViewer';
 
+window.routePrefix = '';
+if (window.location.pathname.startsWith('/streamereventviewer')) {
+	window.routePrefix = '/streamereventviewer/public';
+}
+
 let routes = [
 	{
 		name: 'login',
-		path: '/login',
+		path: routePrefix + '/login',
 		component: TwitchLogin
 	},
 	{
 		name: 'stream',
-		path: '/',
+		path: routePrefix + '/',
 		component: StreamViewer
 	}
 ]

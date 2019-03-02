@@ -12,10 +12,11 @@
 */
 
 Route::group([
-	'prefix' => 'webhooks'
+	'prefix' => 'webhooks',
+	'namespace' => 'Webhooks'
 ], function () {
-	Route::post('users/follows', 'WebhooksController@userFollows');
-	Route::get('users/follows', 'WebhooksController@userFollows');
+	Route::post('users/follows', 'FollowsController@handle');
+	Route::get('users/follows', 'FollowsController@verify');
 });
 
 Route::group([

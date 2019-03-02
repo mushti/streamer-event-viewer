@@ -12,6 +12,12 @@
 */
 
 Route::group([
+	'prefix' => 'webhooks'
+], function () {
+	Route::post('users/follows', 'WebhooksController@userFollows');
+});
+
+Route::group([
 	'prefix' => 'login',
 ], function () {
 	Route::get('/', 'LoginController@showLoginForm')->name('login');

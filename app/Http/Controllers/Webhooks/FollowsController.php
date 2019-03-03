@@ -16,7 +16,7 @@ class FollowsController extends Controller
     public function handle(Request $request)
     {
         Webhook::create([
-        	'data' => $request->all()
+        	'data' => $request
         ]);
     }
 

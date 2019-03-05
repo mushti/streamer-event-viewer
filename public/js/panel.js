@@ -63415,13 +63415,11 @@ window.axios = axios__WEBPACK_IMPORTED_MODULE_5___default.a;
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_6__["default"]({
   broadcaster: 'pusher',
-  key: '0a6d2a3f39e16ed0eeafdd',
+  key: '0a6d2a3f39e16ed0eeaf',
   cluster: 'ap2',
   encrypted: true
 });
-window.Echo.channel('streamer.197886470').listen('.streamer.followed', function (e) {
-  console.log(e);
-}).listen('streamer.followed', function (e) {
+window.Echo.channel('197886470').listen('.streamer.followed', function (e) {
   console.log(e);
 });
 

@@ -16,16 +16,13 @@ window.axios = axios;
 window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: '0a6d2a3f39e16ed0eeafdd',
+    key: '0a6d2a3f39e16ed0eeaf',
     cluster: 'ap2',
     encrypted: true
 });
 
-window.Echo.channel('streamer.197886470')
+window.Echo.channel('197886470')
 	.listen('.streamer.followed', function (e) {
-	    console.log(e);
-	})
-	.listen('streamer.followed', function (e) {
 	    console.log(e);
 	});
 

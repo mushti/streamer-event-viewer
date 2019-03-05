@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Webhooks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Webhook;
+use App\Events\UserFollowedStreamer;
 
 class FollowsController extends Controller
 {

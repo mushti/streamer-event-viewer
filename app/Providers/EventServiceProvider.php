@@ -21,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\\Twitch\\TwitchExtendSocialite@handle',
         ],
+        'App\Events\UserFollowedStreamer' => []
     ];
 
     /**

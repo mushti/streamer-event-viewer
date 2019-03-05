@@ -39,7 +39,7 @@ class UserFollowedStreamer implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('streamer.'.$this->update->to_id);
+        return new PrivateChannel('streamer.'.$this->update['to_id']);
     }
 
     /**
@@ -50,5 +50,15 @@ class UserFollowedStreamer implements ShouldBroadcast
     public function broadcastAs()
     {
         return 'streamer.followed';
+    }
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return [ 'message' => $this->update['from_name'].' followed '.$this->update['to_name'] ];
     }
 }

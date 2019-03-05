@@ -63419,6 +63419,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_6__["default"]({
   cluster: 'ap2',
   encrypted: true
 });
+window.Echo.channel('streamer.197886470').listen('.streamer.followed', function (e) {
+  console.log(e);
+});
 
 __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"); // Tell Vue to use VueRouter.
 

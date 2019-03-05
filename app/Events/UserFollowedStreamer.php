@@ -29,6 +29,7 @@ class UserFollowedStreamer implements ShouldBroadcast
     public function __construct($update)
     {
         $this->update = $update;
+        \Log::info($update);
     }
 
     /**
@@ -39,5 +40,15 @@ class UserFollowedStreamer implements ShouldBroadcast
     public function broadcastOn()
     {
         return new PrivateChannel('streamer.'.$this->update->to_id);
+    }
+
+    /**
+     * The event's broadcast name.
+     *
+     * @return string
+     */
+    public function broadcastAs()
+    {
+        return 'streamer.followed';
     }
 }

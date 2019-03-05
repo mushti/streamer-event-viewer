@@ -63419,7 +63419,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_6__["default"]({
   cluster: 'ap2',
   encrypted: true
 });
-window.Echo.channel('streamer.197886470').listen('.streamer.followed', function (e) {
+window.Echo.channel('197886470').listen('.streamer.followed', function (e) {
   console.log(e);
 });
 

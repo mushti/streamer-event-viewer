@@ -21,7 +21,7 @@ window.Echo = new Echo({
     encrypted: true
 });
 
-window.Echo.channel('streamer.197886470')
+window.Echo.channel('197886470')
 	.listen('.streamer.followed', function (e) {
 	    console.log(e);
 	});

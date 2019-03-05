@@ -39,7 +39,7 @@ class UserFollowedStreamer implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('streamer.'.$this->update['to_id']);
+        return new Channel($this->update['to_id']);
     }
 
     /**

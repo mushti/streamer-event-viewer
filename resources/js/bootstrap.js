@@ -5,6 +5,7 @@ import Popper from 'popper.js';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
+import Echo from "laravel-echo";
 
 // Initialize dependencies.
 window._ = lodash;
@@ -12,6 +13,22 @@ window.Popper = Popper.default;
 window.$ = window.jQuery = jQuery;
 window.Vue = Vue;
 window.axios = axios;
+window.Pusher = require('pusher-js');
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '0a6d2a3f39e16ed0eeafdd',
+    cluster: 'ap2',
+    encrypted: true
+});
+
+window.Echo.channel('streamer.197886470')
+	.listen('.streamer.followed', function (e) {
+	    console.log(e);
+	})
+	.listen('streamer.followed', function (e) {
+	    console.log(e);
+	});
+
 require('bootstrap');
 
 // Tell Vue to use VueRouter.

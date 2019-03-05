@@ -11,6 +11,6 @@
 |
 */
 
-Broadcast::channel('streamer.{id}', function() {
+Broadcast::channel('streamers.{id}', function() {
     return true;
 });

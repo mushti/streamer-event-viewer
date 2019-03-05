@@ -20,7 +20,7 @@ class FollowsController extends Controller
         	'data' => $request->all()
         ]);
         
-        event(new UserFollowedStreamer($request->data));
+        event(new UserFollowedStreamer($request->data[0]));
     }
 
     /**

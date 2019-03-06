@@ -42,8 +42,10 @@
         watch: {
             favorite: function (current, previous) {
                 if (previous) {
-                    Echo.leave('streamers.' + previous.twitch_id);
-                    this.events = [];
+                    if (current.twitch_id != previous.twitch_id) {
+                        Echo.leave('streamers.' + previous.twitch_id);
+                        this.events = [];
+                    }
                 }
                 Echo.channel('streamers.' + current.twitch_id)
                     .listen('.streamer.followed', (e) => {

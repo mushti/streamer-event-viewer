@@ -91,7 +91,7 @@ class Update extends FormRequest
      */
     public function subscribeWebhook($streamer_id, $access_token)
     {
-        if (!Webhook::where([
+        if (Webhook::where([
             ['topic', '=', 'https://api.twitch.tv/helix/users/follows?first=1&to_id=' . $streamer_id],
             ['expires_at', '>', date('Y-m-d H:i:s')]
         ])->first()) {

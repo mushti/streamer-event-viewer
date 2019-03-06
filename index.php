@@ -1,4 +1,4 @@
 <?php
 
-header('Location: /public');
+header('Location: /streamereventviewer/public/login');
 die();

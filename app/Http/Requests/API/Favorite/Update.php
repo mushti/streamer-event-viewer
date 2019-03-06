@@ -51,6 +51,8 @@ class Update extends FormRequest
         $streamer = User::findOrCreateForTwitch($twitch);
         $this->user()->favorites()->sync($streamer);
 
+        $this->subscribeWebhook($streamer->twitch_id, $this->user()->access_token);
+
         return $this->user()->favorite;
     }
 
@@ -76,6 +78,34 @@ class Update extends FormRequest
                 'avatar' => $response->data[0]->profile_image_url,
                 'cover' => $response->data[0]->offline_image_url
             ] : null;
+        } catch (\Exception $e) {
+            return;
+        }
+    }
+
+    /**
+     * Subscribe to Twitch Webhook.
+     *
+     * @return void
+     */
+    public function subscribeWebhook($streamer_id, $access_token)
+    {
+        try {
+            $client = new Client();
+            $response = $client->post('webhooks/hub', [
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Authorization' => 'Bearer ' . $access_token
+                ],
+                'form_params' => [
+                    'hub.callback' => 'http://ec2-52-10-243-103.us-west-2.compute.amazonaws.com/streamereventviewer/public/webhooks/users/follows',
+                    'hub.topic' => 'https://api.twitch.tv/helix/users/follows?first=1&to_id=' . $streamer_id,
+                    'hub.lease_seconds' => '86400',
+                    'hub.mode' => 'subscribe'
+                ]
+            ]);
+            $response = json_decode($response->getBody());
+            return true;
         } catch (\Exception $e) {
             return;
         }

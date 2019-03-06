@@ -21,11 +21,6 @@ window.Echo = new Echo({
     encrypted: true
 });
 
-window.Echo.channel('streamers.197886470')
-	.listen('.streamer.followed', function (e) {
-	    console.log(e);
-	});
-
 require('bootstrap');
 
 // Tell Vue to use VueRouter.

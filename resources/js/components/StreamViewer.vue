@@ -1,6 +1,6 @@
 <template>
     <main role="main" class="container-fluid mt-3">
-        <stream v-if="favorite" :streamer="favorite"></stream>
+        <stream v-if="favorite" :streamer="favorite" :events="events"></stream>
 
         <div v-else class="row justify-content-center">
             <div class="col-md-4">
@@ -26,7 +26,8 @@
 
         data() {
             return {
-                favorite: null
+                favorite: null,
+                events: []
             }
         },
 
@@ -35,6 +36,21 @@
 
             if (!this.favorite) {
                 $('#favoriteModal').modal('toggle');
+            }
+        },
+
+        watch: {
+            favorite: function (current, previous) {
+                if (previous) {
+                    Echo.leave('streamers.' + previous.twitch_id);
+                }
+                Echo.channel('streamers.' + current.twitch_id)
+                    .listen('.streamer.followed', (e) => {
+                        this.events.push(e.message);
+                        if (this.events.length > 10) {
+                            this.events.shift();
+                        }
+                    });
             }
         }
     }

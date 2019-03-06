@@ -17,6 +17,12 @@
 					</div>
 				</div>
 			</div>
+			<div class="card mb-3">
+				<div class="card-header">Events</div>
+				<div class="card-body">
+					<li v-for="event in events"><small>{{ event }}</small></li>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="card mb-3" style="overflow: hidden">
@@ -39,7 +45,8 @@
 <script>
     export default {
     	props: [
-    		'streamer'
+    		'streamer',
+    		'events'
     	],
 
         mounted() {

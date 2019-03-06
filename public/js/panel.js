@@ -1913,8 +1913,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['streamer'],
+  props: ['streamer', 'events'],
   mounted: function mounted() {}
 });
 
@@ -1956,7 +1962,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      favorite: null
+      favorite: null,
+      events: []
     };
   },
   mounted: function mounted() {
@@ -1964,6 +1971,23 @@ __webpack_require__.r(__webpack_exports__);
 
     if (!this.favorite) {
       $('#favoriteModal').modal('toggle');
+    }
+  },
+  watch: {
+    favorite: function favorite(current, previous) {
+      var _this = this;
+
+      if (previous) {
+        Echo.leave('streamers.' + previous.twitch_id);
+      }
+
+      Echo.channel('streamers.' + current.twitch_id).listen('.streamer.followed', function (e) {
+        _this.events.push(e.message);
+
+        if (_this.events.length > 10) {
+          _this.events.shift();
+        }
+      });
     }
   }
 });
@@ -47456,6 +47480,19 @@ var render = function() {
             ])
           ])
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card mb-3" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("Events")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          _vm._l(_vm.events, function(event) {
+            return _c("li", [_c("small", [_vm._v(_vm._s(event))])])
+          }),
+          0
+        )
       ])
     ]),
     _vm._v(" "),
@@ -47552,7 +47589,9 @@ var render = function() {
     { staticClass: "container-fluid mt-3", attrs: { role: "main" } },
     [
       _vm.favorite
-        ? _c("stream", { attrs: { streamer: _vm.favorite } })
+        ? _c("stream", {
+            attrs: { streamer: _vm.favorite, events: _vm.events }
+          })
         : _c("div", { staticClass: "row justify-content-center" }, [
             _c("div", { staticClass: "col-md-4" }, [
               _c("div", { staticClass: "text-center" }, [
@@ -63418,9 +63457,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_6__["default"]({
   key: '0a6d2a3f39e16ed0eeaf',
   cluster: 'ap2',
   encrypted: true
-});
-window.Echo.channel('streamers.197886470').listen('.streamer.followed', function (e) {
-  console.log(e);
 });
 
 __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"); // Tell Vue to use VueRouter.

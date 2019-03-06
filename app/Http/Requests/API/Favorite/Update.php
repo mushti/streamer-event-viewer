@@ -108,7 +108,7 @@ class Update extends FormRequest
                 'form_params' => [
                     'hub.callback' => 'http://ec2-52-10-243-103.us-west-2.compute.amazonaws.com/streamereventviewer/public/webhooks/users/follows',
                     'hub.topic' => 'https://api.twitch.tv/helix/users/follows?first=1&to_id=' . $streamer_id,
-                    'hub.lease_seconds' => '30', // 86400
+                    'hub.lease_seconds' => '86400', // 86400
                     'hub.mode' => 'subscribe'
                 ]
             ]);

@@ -16,10 +16,6 @@ class FollowsController extends Controller
      */
     public function handle(Request $request)
     {
-        Webhook::create([
-        	'data' => $request->all()
-        ]);
-        
         event(new UserFollowedStreamer($request->data[0]));
     }
 

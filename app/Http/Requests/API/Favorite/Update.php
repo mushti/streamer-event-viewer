@@ -5,6 +5,7 @@ namespace App\Http\Requests\API\Favorite;
 use Illuminate\Foundation\Http\FormRequest;
 use Twitch\Client;
 use App\Models\User;
+use App\Models\Webhook;
 
 class Update extends FormRequest
 {
@@ -90,6 +91,13 @@ class Update extends FormRequest
      */
     public function subscribeWebhook($streamer_id, $access_token)
     {
+        if (!Webhook::where([
+            ['topic', '=', 'https://api.twitch.tv/helix/users/follows?first=1&to_id=' . $streamer_id],
+            ['expires_at', '>', date('Y-m-d H:i:s')]
+        ])->first()) {
+            return;
+        }
+
         try {
             $client = new Client();
             $response = $client->post('webhooks/hub', [
@@ -100,7 +108,7 @@ class Update extends FormRequest
                 'form_params' => [
                     'hub.callback' => 'http://ec2-52-10-243-103.us-west-2.compute.amazonaws.com/streamereventviewer/public/webhooks/users/follows',
                     'hub.topic' => 'https://api.twitch.tv/helix/users/follows?first=1&to_id=' . $streamer_id,
-                    'hub.lease_seconds' => '86400',
+                    'hub.lease_seconds' => '30', // 86400
                     'hub.mode' => 'subscribe'
                 ]
             ]);

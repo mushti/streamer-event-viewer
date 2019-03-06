@@ -26,9 +26,15 @@ class FollowsController extends Controller
      */
     public function verify(Request $request)
     {
-        Webhook::create([
-        	'data' => $request->all()
-        ]);
+        if (!$webhook = Webhook::where('topic', $request->hub_topic)->first()) {
+            $webhook = Webhook::create([
+                'topic' => $request->hub_topic,
+            	'expires_at' => date('Y-m-d H:i:s', time() + $request->hub_lease_seconds)
+            ]);
+        }
+
+        $webhook->expires_at = date('Y-m-d H:i:s', time() + $request->hub_lease_seconds);
+        $webhook->save();
 
         echo $request->hub_challenge;
     }

@@ -12,15 +12,6 @@ class Webhook extends Model
      * @var array
      */
     protected $fillable = [
-        'data',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'data' => 'object',
+        'topic', 'expires_at'
     ];
 }

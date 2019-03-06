@@ -45,15 +45,23 @@
                     if (current.twitch_id != previous.twitch_id) {
                         Echo.leave('streamers.' + previous.twitch_id);
                         this.events = [];
+                        Echo.channel('streamers.' + current.twitch_id)
+                            .listen('.streamer.followed', (e) => {
+                                this.events.push(e.message);
+                                if (this.events.length > 10) {
+                                    this.events.shift();
+                                }
+                            });
                     }
+                } else {
+                    Echo.channel('streamers.' + current.twitch_id)
+                        .listen('.streamer.followed', (e) => {
+                            this.events.push(e.message);
+                            if (this.events.length > 10) {
+                                this.events.shift();
+                            }
+                        });
                 }
-                Echo.channel('streamers.' + current.twitch_id)
-                    .listen('.streamer.followed', (e) => {
-                        this.events.push(e.message);
-                        if (this.events.length > 10) {
-                            this.events.shift();
-                        }
-                    });
             }
         }
     }

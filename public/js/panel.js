@@ -1981,16 +1981,23 @@ __webpack_require__.r(__webpack_exports__);
         if (current.twitch_id != previous.twitch_id) {
           Echo.leave('streamers.' + previous.twitch_id);
           this.events = [];
+          Echo.channel('streamers.' + current.twitch_id).listen('.streamer.followed', function (e) {
+            _this.events.push(e.message);
+
+            if (_this.events.length > 10) {
+              _this.events.shift();
+            }
+          });
         }
+      } else {
+        Echo.channel('streamers.' + current.twitch_id).listen('.streamer.followed', function (e) {
+          _this.events.push(e.message);
+
+          if (_this.events.length > 10) {
+            _this.events.shift();
+          }
+        });
       }
-
-      Echo.channel('streamers.' + current.twitch_id).listen('.streamer.followed', function (e) {
-        _this.events.push(e.message);
-
-        if (_this.events.length > 10) {
-          _this.events.shift();
-        }
-      });
     }
   }
 });

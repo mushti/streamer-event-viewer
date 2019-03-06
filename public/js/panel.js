@@ -2021,6 +2021,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     if (this.$store.state.user) {
@@ -47654,14 +47659,28 @@ var render = function() {
     { staticClass: "container-fluid", attrs: { role: "main" } },
     [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-twitch",
-            attrs: { href: _vm.$url + "/login/twitch" }
-          },
-          [_vm._v("Login with Twitch")]
-        )
+        _c("div", { staticClass: "col-md-4 text-center" }, [
+          _c("h1", { staticClass: "mb-5" }, [_vm._v("Streamer Event Viewer")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-twitch px-3",
+              attrs: { href: _vm.$url + "/login/twitch" }
+            },
+            [
+              _c("img", {
+                staticClass: "mr-3",
+                attrs: {
+                  src: _vm.$url + "/images/twitch-logo.svg",
+                  width: "20",
+                  height: "20"
+                }
+              }),
+              _vm._v(" Login with Twitch\n            ")
+            ]
+          )
+        ])
       ])
     ]
   )

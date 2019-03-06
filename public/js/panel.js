@@ -1979,6 +1979,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (previous) {
         Echo.leave('streamers.' + previous.twitch_id);
+        this.events = [];
       }
 
       Echo.channel('streamers.' + current.twitch_id).listen('.streamer.followed', function (e) {

@@ -16,7 +16,7 @@ Route::group([
 	'namespace' => 'Webhooks'
 ], function () {
 	Route::post('users/follows', 'FollowsController@handle');
-	Route::get('users/follows', 'FollowsController@authorize');
+	Route::get('users/follows', 'FollowsController@verify');
 });
 
 Route::group([

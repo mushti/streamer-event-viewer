@@ -26,7 +26,7 @@ class FollowsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function authorize(Request $request)
+    public function verify(Request $request)
     {
         if (!$webhook = Webhook::where('topic', $request->hub_topic)->first()) {
             $webhook = Webhook::create([

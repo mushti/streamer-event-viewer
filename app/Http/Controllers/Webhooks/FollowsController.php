@@ -10,8 +10,9 @@ use App\Events\UserFollowedStreamer;
 class FollowsController extends Controller
 {
     /**
-     * Show the application panel.
+     * Handle the webhook callback request.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function handle(Request $request)
@@ -20,11 +21,12 @@ class FollowsController extends Controller
     }
 
     /**
-     * Show the application panel.
+     * Authorize the webhook callback request.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function verify(Request $request)
+    public function authorize(Request $request)
     {
         if (!$webhook = Webhook::where('topic', $request->hub_topic)->first()) {
             $webhook = Webhook::create([
